@@ -2,6 +2,8 @@
 
 Демонстрация функционала v1
 
-<video width="320" height="240" controls>
-  <source src="Функционал v1.MP4" type="video/mp4">
-</video>
+![](Screen/Скрин%201.png)
+![](Screen/Скрин%202.png)
+![](Screen/Скрин%205.png)
+![](Screen/Скрин%204.png)
+![](Screen/Скрин%203.png)

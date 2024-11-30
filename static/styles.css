@@ -1,0 +1,38 @@
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+td, th {
+    padding: 10px;
+}
+
+td {
+    text-align: left; /* Выравнивание по центру */
+}
+
+th {
+    text-align: center; /* Выравнивание по левому краю */
+}
+
+
+
+form {
+    display: flex;
+    flex-direction: column; /* Элементы в столбец */
+    align-items: left; /* Выравнивание по центру по горизонтали */
+}
+
+input {
+    width: 400px; /* Ширина элементов ввода */
+    margin: 5px; /* Отступ между элементами */
+}
+
+/* table {
+    table-layout: fixed;
+    width: 20%;
+} */
+
+/* td, th {
+    width: 10%; /* Равномерное распределение на 4 столбца 
+} */

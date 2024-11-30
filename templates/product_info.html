@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Information</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+    <!-- Подключение стилей и скриптов jQuery и jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+</head>
+<body>
+    <h1>Состав:</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>К-во</th>
+                <th>Остаток</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table_data %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.cnt }}</td>
+                    <td>{{ row.balance }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>    
+
+    <h1>Расчет себестоимости:</h1>
+    <table border="2">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Закупка</th>
+                <th>Закупка всего</th>
+                <th>Реализация</th>
+                <th>Реализация всего</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table_data %}
+                <tr>
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.buying }}</td>
+                    <td>{{ row.buying_total }}</td>
+                    <td>{{ row.realization }}</td>
+                    <td>{{ row.realization_total }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+
+    <h1>Ценообразование продукта:</h1>
+    <table border="3">
+        <thead>
+            <tr>
+                <th>Закупка, руб.</th>
+                <th>Надбавка на компоненты</th>
+                <th>Надбавка на компоненты, руб.</th>
+                <th>Реализация</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>{{ price_prod.get('buying_total') }}</td>
+                    <td>{{ price_prod.get('nadb_source_pr') }}</td>
+                    <td>{{ price_prod.get('nadb_source') }}</td>
+                    <td>{{ price_prod.get('realization_total') }}</td>
+                </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <table border="4">
+        <thead>
+            <tr>
+                <th>Надбавка на продукт</th>
+                <th>Цена, руб.</th>
+                <th>Скидка</th>
+                <th>Скидка, руб.</th>
+                <th>Продажа с учетом скидки, руб.</th>
+                <th>Маржа, руб.</th>
+                <th>Маржа</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>{{ price_prod.get('val_up') }}</td>
+                    <td>{{ price_prod.get('final_price') }}</td>
+                    <td>{{ price_prod.get('sale') }}</td>
+                    <td>{{ price_prod.get('sale_value') }}</td>
+                    <td>{{ price_prod.get('final_price_sale') }}</td>
+                    <td>{{ price_prod.get('margin') }}</td>
+                    <td>{{ price_prod.get('margin_pr') }}</td>
+                </tr>
+        </tbody>
+    </table>
+
+
+
+    <form id="corr">
+        <h2>Введите надбавку и скидку:</h2>
+
+        <label for="price_nadb">Надбавка:</label>
+        <input type="number" id="price_nadb" name="price_nadb" required value=0>
+
+        <label for="sale_nadb">Скидка:</label>
+        <input type="number" id="sale_nadb" name="sale_nadb" required value=0>
+
+    </form>
+
+    <button type="button" onclick="price_refresh()">Пересчитать</button>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product construct</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    
+    <!-- Подключение стилей и скриптов jQuery и jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <style>
+        input {
+            text-align: center; /* Выравнивание по центру */
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Передаем список названий в JavaScript -->
+    <div id="yourListOfValues" style="display: none;">{{ yourListOfValues | tojson }}</div>
+
+
+    <h2>Введите название и количество:</h2>
+
+    <form id="productForm">
+
+        <label for="product">Название:</label>
+        <input type="text" id="product" name="product"  list="product_names" required>
+        <datalist id="product_names">
+            <!-- Добавление подсказок из имеющихся данных -->
+            {% for product in product_names %}
+                <option value="{{ product }}">
+            {% endfor %}
+        </datalist>
+
+        <br>
+        
+
+        <label for="quantity">Количество:</label>
+        <input type="number" id="quantity" name="quantity" required style="width: 100px;">
+
+    </form>
+
+    <button type="button" onclick="addProduct()">Добавить в список</button>
+
+
+    <h2>Добавленные значения:</h2>
+
+    <ul id="productList"></ul>
+
+    
+    <button type="button" onclick="submitProducts()">Собрать продукт</button>
+
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
